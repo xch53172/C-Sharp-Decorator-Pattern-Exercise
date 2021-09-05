@@ -53,7 +53,7 @@ namespace C_Sharp_Decorator_Pattern_Exercise_Design_Pattern
         }
         public override StreamWriter Operation() => new StreamWriter(this.filename, true, Encoding.Unicode);    //寫入3變數的建構子
     }
-    public abstract class FileOperation : BaseFile    //所有的裝飾者類別皆繼承於此,宣告為抽象類別,是為不要被繼承
+    public abstract class FileOperation : BaseFile    //所有的裝飾者,皆繼承於此抽象類別,實作ExtraOperation()來擴充需要的功能
     {
         protected BaseFile baseFile;
         protected StreamWriter sw;
@@ -69,7 +69,7 @@ namespace C_Sharp_Decorator_Pattern_Exercise_Design_Pattern
             return sw;
         }
     }
-    public class WriteString : FileOperation    //將設定的字串寫入檔案
+    public class WriteString : FileOperation    //將設定的字串寫入檔案,裝飾者
     {
         private string WriteStr;
         public WriteString(BaseFile bf, String str) : base(bf)    //加入裝飾
@@ -81,7 +81,7 @@ namespace C_Sharp_Decorator_Pattern_Exercise_Design_Pattern
             base.sw.WriteLine(WriteStr);
         }
     }
-    public class WriteDate : FileOperation  //將今天的日期寫入檔案
+    public class WriteDate : FileOperation  //將今天的日期寫入檔案,裝飾者
     {
         public WriteDate(BaseFile bf) : base(bf)  //加入裝飾
         {
@@ -93,7 +93,7 @@ namespace C_Sharp_Decorator_Pattern_Exercise_Design_Pattern
             base.sw.WriteLine(now.ToString("yyyy/MM/dd"));
         }
     }
-    public class WriteHelloWorld : FileOperation    //寫入固定字串"Hello, World!"
+    public class WriteHelloWorld : FileOperation    //寫入固定字串"Hello, World!",裝飾者
     {
         public WriteHelloWorld(BaseFile bf) : base(bf)
         {
@@ -104,7 +104,7 @@ namespace C_Sharp_Decorator_Pattern_Exercise_Design_Pattern
             base.sw.WriteLine("Hello, World!");
         }
     }
-    public class CloseFile : FileOperation  //關閉檔案
+    public class CloseFile : FileOperation  //關閉檔案,裝飾者
     {
         public CloseFile(BaseFile bf) : base(bf)
         {
